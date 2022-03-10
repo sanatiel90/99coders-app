@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const BannerSection = styled.section`
-    background-color: #0d6efd;
+    background-color: var(--mainColor);
     color: #fff;
     padding: 100px 0 70px 0;
 
