@@ -1,5 +1,13 @@
+import Banner from './Components/Banner';
+import Features from './Components/Features';
+import Menu from './Components/Menu';
+
 export default function Site() {
-    return (
-        <h1>Site</h1>
+    return (        
+        <>
+            <Menu />
+            <Banner />
+            <Features />
+        </>
     )
 }
