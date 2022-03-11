@@ -9,6 +9,8 @@ import ResetPassword from './pages/ResetPassword';
 import Home from './pages/Home';
 import NewClient from './pages/NewClient';
 
+import './services/firebase';
+
 function App() {
   return (
    <BrowserRouter>

@@ -1,7 +1,18 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Form, FormContainer, LoginLinks } from "./style";
 
+
+
 export default function Login() {
+
+    const [email, setEmail] = useState('');    
+    const [password, setPassword] = useState('');    
+
+    function handleLogin(){
+        
+    }
+
     return (
         <FormContainer className="d-flex align-items-center text-center">
             <Form>
@@ -9,11 +20,11 @@ export default function Login() {
                 <h1 className="h3 mb-3 fw-normal">Login</h1>
 
                 <div className="form-floating">
-                <input type="email" className="form-control" id="floatingInput" placeholder="E-mail" />
+                <input type="email" onChange={event => setEmail(event.target.value)} className="form-control" id="floatingInput" placeholder="E-mail" />
                 <label htmlFor="floatingInput">E-mail</label>
                 </div>
                 <div className="form-floating">
-                <input type="password" className="form-control" id="floatingPassword" placeholder="Senha" />
+                <input type="password" onChange={event => setPassword(event.target.value)} className="form-control" id="floatingPassword" placeholder="Senha" />
                 <label htmlFor="floatingPassword">Senha</label>
                 </div>
 
@@ -22,7 +33,7 @@ export default function Login() {
                     <input type="checkbox" value="remember-me" /> Lembre me
                 </label>
                 </div>
-                <button className="w-100 btn btn-lg btn-primary" type="submit">Acessar</button>
+                <button className="w-100 btn btn-lg btn-primary" onClick={handleLogin} type="button">Acessar</button>
                 <p className="mt-5 mb-3 text-muted">&copy;Desenvolvido por 99 Coders</p>
 
                 <LoginLinks>
