@@ -2,7 +2,7 @@ import { FeaturesBox, FeaturesSection, Icon } from "./style";
 
 export default function Features() {
     return (
-        <FeaturesSection>
+        <FeaturesSection id="features"> 
             <div className="container">
                 <div className="row">
                     <FeaturesBox className="col-lg-4">

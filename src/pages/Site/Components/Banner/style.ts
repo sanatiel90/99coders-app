@@ -9,7 +9,7 @@ export const BannerSection = styled.section`
         width: 100%;
     }
 
-    button {
+    a {
         margin: 8% 3% 5% 0;
     }
 

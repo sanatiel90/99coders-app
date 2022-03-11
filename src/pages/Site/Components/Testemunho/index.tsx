@@ -2,7 +2,7 @@ import { TestemunhoSection, CarouselItem } from "./style";
 
 export default function Testemunho() {
     return (
-        <TestemunhoSection>
+        <TestemunhoSection id="testemunho">
             <div className="container">
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                 <div className="carousel-inner">
