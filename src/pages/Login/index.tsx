@@ -1,5 +1,6 @@
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Form, FormContainer, LoginLinks } from "./style";
 
 
@@ -8,9 +9,27 @@ export default function Login() {
 
     const [email, setEmail] = useState('');    
     const [password, setPassword] = useState('');    
+    const [success, setSuccess] = useState(true);    
 
-    function handleLogin(){
-        
+    const navigate = useNavigate();
+
+    async function handleLogin(){
+        try {
+            const userCredential = await signInWithEmailAndPassword(getAuth(), email, password);
+            console.log(userCredential.user)
+            if (userCredential.user) {
+                setSuccess(true);
+                navigate('/home');
+                
+            } else {
+                setSuccess(false);
+            }
+            
+        } catch (err) {
+            setSuccess(false);
+            console.log('ERRO LOGIN');
+            console.log(err);
+        }
     }
 
     return (
@@ -34,6 +53,9 @@ export default function Login() {
                 </label>
                 </div>
                 <button className="w-100 btn btn-lg btn-primary" onClick={handleLogin} type="button">Acessar</button>
+                
+                { !success && <div className="alert alert-danger mt-2" role="alert"> Erro ao logar </div> }
+                
                 <p className="mt-5 mb-3 text-muted">&copy;Desenvolvido por 99 Coders</p>
 
                 <LoginLinks>

@@ -7,16 +7,21 @@ export default function Register() {
 
     const [email, setEmail] = useState('');    
     const [password, setPassword] = useState('');    
+    const [success, setSuccess] = useState(true);    
 
     async function handleRegister() {
-        try {
-            console.log('1')
+        try {            
             const auth = getAuth();
-            const userCredencial = await createUserWithEmailAndPassword(auth, email, password);
-            console.log(userCredencial.user);
-            console.log('2')
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            
+            if (userCredential.user) {
+                setSuccess(true);
+            } else {
+                setSuccess(false);
+            }
 
         } catch (err) {
+            setSuccess(false);
             console.log('ERRO');
             console.log(err);
         }
@@ -39,6 +44,9 @@ export default function Register() {
                 </div>
 
                 <button className="w-100 btn btn-lg btn-primary" onClick={handleRegister} type="button">Criar Conta</button>
+
+                { !success && <div className="alert alert-danger mt-2" role="alert"> Erro ao criar usuário </div> }
+
                 <p className="mt-5 mb-3 text-muted">&copy;Desenvolvido por 99 Coders</p>
 
                 <LoginLinks>
