@@ -8,14 +8,13 @@ interface ClienteType {
 }
 
 interface TableClientProps {
-    arrayClientes: ClienteType[]
+    arrayClientes: ClienteType[];
+    deleteCliente: (id: string) => void;
 }
 
-export default function TableClient({ arrayClientes }: TableClientProps) {
+export default function TableClient({ arrayClientes, deleteCliente }: TableClientProps) {
 
-    function deleteCliente(id: string) {
-        
-    }
+    
     
     return (
         <table className="table table-bordered table-hover">

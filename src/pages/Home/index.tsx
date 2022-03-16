@@ -1,5 +1,6 @@
-import { collection, getFirestore, onSnapshot } from "firebase/firestore";
+import { collection, deleteDoc, doc, getFirestore, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import SweetAlert from "react-bootstrap-sweetalert";
 import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 import TableClient from "../../components/TableClient";
@@ -10,6 +11,9 @@ export default function Home() {
     const [clientes, setClientes] = useState<ClienteType[]>([]);
     const [busca, setBusca] = useState('');
     const [texto, setTexto] = useState('');
+    const [deletado, setDeletado] = useState('');
+    const [confirma, setConfirma] = useState(false);
+    const [confirmaId, setConfirmaId] = useState('');
 
     interface ClienteType {
         id: string;
@@ -23,7 +27,7 @@ export default function Home() {
         const clientesRef = collection(getFirestore(), 'clientes');
 
         let listClientes: ClienteType[] = [];
-        
+       
         onSnapshot(clientesRef, clienteSnapshot => {
             clienteSnapshot.forEach(cliente => {
                 if (cliente.data().nome.indexOf(busca) >= 0) {
@@ -36,10 +40,24 @@ export default function Home() {
                 }                
             })
 
-            setClientes(listClientes);
+            setClientes(listClientes);            
         });
-    }, [busca]);
+    }, [busca, deletado]);
 
+    
+    function deleteClient(id: string) {
+        
+            deleteDoc(doc(getFirestore(), 'clientes', id)).then((response) => {
+                setDeletado(id);
+                setConfirma(false);
+            });            
+        
+    }
+
+    function confirmDeleteClient(id: string){
+        setConfirmaId(id);
+        setConfirma(true);
+    }
 
     return (
         <>
@@ -57,7 +75,24 @@ export default function Home() {
                         </div>       
                     </div>    
                 </div>
-                <TableClient arrayClientes={clientes}  />
+                <TableClient arrayClientes={clientes} deleteCliente={confirmDeleteClient}  />
+
+                { confirma &&                 
+                    <SweetAlert
+                        warning
+                        showCancel
+                        confirmBtnText="Sim"
+                        confirmBtnBsStyle="danger"
+                        cancelBtnText="Não"                    
+                        title="Excluir Cliente"
+                        cancelBtnStyle={{ textDecoration: 'none' }}
+                        onConfirm={() => deleteClient(confirmaId)}
+                        onCancel={() => setConfirma(false)}
+                        reverseButtons                    
+                    >
+                    Deseja excluir o cliente?
+                </SweetAlert>
+                }
             </Container>
         </>
     )
