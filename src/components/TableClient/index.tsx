@@ -36,7 +36,7 @@ export default function TableClient({ arrayClientes }: TableClientProps) {
                         <td>{c.email}</td>
                         <td>{c.fone}</td>
                         <td>
-                            <Link to="" style={{ color: 'blue' }} ><i className="fa-solid fa-pen-to-square"></i></Link>
+                            <Link to={`/edit-client/${c.id}`} style={{ color: 'blue' }} ><i className="fa-solid fa-pen-to-square"></i></Link>
                             <Link to="" onClick={() => deleteCliente(c.id)} style={{ color: 'red', marginLeft: 10 }} ><i className="fa-solid fa-trash-can"></i></Link>
                         </td>
                     </tr>                                                

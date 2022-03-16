@@ -1,12 +1,12 @@
 import { collection, getFirestore, addDoc } from "firebase/firestore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import { Container, ButtonForm } from "./style";
 
 
 
-export default function NewClient() {
+export default function EditClient(props: string) {
 
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
@@ -14,16 +14,9 @@ export default function NewClient() {
 
     const navigate = useNavigate();
 
-    async function handleCreateClient() {
-        const docRef = await addDoc(collection(getFirestore(), 'clientes'), {
-            nome,
-            email,
-            fone
-        })
-
-        navigate('/home');
+    useEffect(() => {
         
-    }
+    }, []);
 
     return (
         <>
@@ -32,6 +25,11 @@ export default function NewClient() {
                 <div className="offset-lg-3 col-lg-6">
                     <h1>Novo Cliente</h1>
                     <form>
+                        <div className="mb-3">
+                            <label htmlFor="inputNome" className="form-label">Código</label>
+                            <input type="text" className="form-control" id="inputNome" aria-describedby="emailHelp" disabled />                        
+                        </div>
+
                         <div className="mb-3">
                             <label htmlFor="inputNome" className="form-label">Nome</label>
                             <input onChange={event => setNome(event.target.value)} type="text" className="form-control" id="inputNome" aria-describedby="emailHelp" />                        
@@ -47,7 +45,7 @@ export default function NewClient() {
                     
                         <div className="text-center" >
                             <ButtonForm type="reset" className="btn btn-outline-primary">Cancelar</ButtonForm>
-                            <ButtonForm type="button" onClick={handleCreateClient}  className="btn btn-primary">Salvar</ButtonForm>
+                            <ButtonForm type="button"  className="btn btn-primary">Salvar</ButtonForm>
                         </div>
                         
                     </form>

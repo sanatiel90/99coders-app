@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import NewClient from './pages/NewClient';
 
 import './services/firebase';
+import EditClient from './pages/EditClient';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path='/reset' element={<ResetPassword/>}  />
         <Route path='/home' element={<Home/>}  />
         <Route path='/new-client' element={<NewClient/>}  />
+        <Route path='/edit-client/:id' element={<EditClient/>}  />
         <Route />
       </Routes>   
    </BrowserRouter>
