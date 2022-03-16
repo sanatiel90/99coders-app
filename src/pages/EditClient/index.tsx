@@ -1,21 +1,31 @@
-import { collection, getFirestore, addDoc } from "firebase/firestore";
+import { collection, getFirestore, addDoc, doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Header from "../../components/Header";
 import { Container, ButtonForm } from "./style";
 
 
 
-export default function EditClient(props: string) {
+export default function EditClient() {
 
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [fone, setFone] = useState('');
 
     const navigate = useNavigate();
+    const params = useParams();
 
     useEffect(() => {
+        if (params.id){
+            const docRef = doc(getFirestore(), 'clientes', params.id);
+            getDoc(docRef).then(response => {
+                if(response.exists()){
+                    response.data();
+                }
+            });
+        }
         
+
     }, []);
 
     return (
