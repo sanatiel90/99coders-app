@@ -1,12 +1,20 @@
 import { collection, deleteDoc, doc, getFirestore, onSnapshot } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SweetAlert from "react-bootstrap-sweetalert";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import TableClient from "../../components/TableClient";
+import { AuthContext } from "../../contexts/AuthContext";
 import { Container } from "./style";
 
 export default function Home() {
+
+    /*const navigate = useNavigate();
+    const { logado } = useContext(AuthContext);
+
+    if (!logado) {
+        navigate('/login');
+    }*/
 
     const [clientes, setClientes] = useState<ClienteType[]>([]);
     const [busca, setBusca] = useState('');
@@ -14,6 +22,7 @@ export default function Home() {
     const [deletado, setDeletado] = useState('');
     const [confirma, setConfirma] = useState(false);
     const [confirmaId, setConfirmaId] = useState('');
+    
 
     interface ClienteType {
         id: string;
@@ -21,6 +30,10 @@ export default function Home() {
         email: string;
         fone: string;
     }
+
+    
+
+    
 
     useEffect(() => {
         

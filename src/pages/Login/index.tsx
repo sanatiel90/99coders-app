@@ -1,6 +1,7 @@
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from '../../contexts/AuthContext';
 import { Form, FormContainer, LoginLinks } from "./style";
 
 
@@ -9,7 +10,9 @@ export default function Login() {
 
     const [email, setEmail] = useState('');    
     const [password, setPassword] = useState('');    
-    const [success, setSuccess] = useState(true);    
+    const [success, setSuccess] = useState(true); 
+    
+    const { atribuiLogado } = useContext(AuthContext);
 
     const navigate = useNavigate();
 
@@ -19,10 +22,14 @@ export default function Login() {
             console.log(userCredential.user)
             if (userCredential.user) {
                 setSuccess(true);
+                localStorage.setItem('logado', 'S');
+                atribuiLogado(true);
                 navigate('/home');
                 
             } else {
                 setSuccess(false);
+                localStorage.setItem('logado', 'N');
+                atribuiLogado(false);
             }
             
         } catch (err) {

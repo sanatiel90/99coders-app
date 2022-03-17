@@ -1,7 +1,17 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
 import { NavBar } from "./style";
 
 export default function Header() {
+
+    const { atribuiLogado  } = useContext(AuthContext);
+
+    function logOut(){
+        atribuiLogado(false);
+        localStorage.removeItem('logado');
+    }
+
     return (
         <NavBar className="navbar fixed-top navbar-expand-md navbar-dark ">            
                 <div className="container-fluid">
@@ -18,7 +28,7 @@ export default function Header() {
                                 <a className="nav-link" href="">Novo Cliente</a>
                             </li>                        
                             <li className="nav-item">
-                                <a className="nav-link" href="">Sair</a>
+                                <a className="nav-link" type="button" onClick={logOut} >Sair</a>
                             </li>                        
                             
                         </ul>                
