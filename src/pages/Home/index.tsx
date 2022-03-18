@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import TableClient from "../../components/TableClient";
 import { AuthContext } from "../../contexts/AuthContext";
+import clientesPDF from "../../reports/clientes";
 import { Container } from "./style";
 
 export default function Home() {
@@ -30,9 +31,6 @@ export default function Home() {
         email: string;
         fone: string;
     }
-
-    
-
     
 
     useEffect(() => {
@@ -79,7 +77,8 @@ export default function Home() {
                 <h1>Cadastro de Clientes</h1>
                 <div className="row">
                     <div className="col-5">
-                        <Link className="btn btn-primary" to={"/new-client"} ><i className="fa-solid fa-plus"></i> Cliente</Link>
+                        <Link className="btn btn-primary" style={{marginRight: 8}} to={"/new-client"} ><i className="fa-solid fa-plus"></i> Cliente</Link>
+                        <button onClick={(event) => clientesPDF(clientes)}  className="btn btn-danger" type="button" id="button-addon2"><i style={{marginRight: 6}} className="fa-solid fa-file-pdf"></i>Gerar PDF</button>
                     </div>    
                     <div className="col-7">
                         <div className="input-group mb-3">
